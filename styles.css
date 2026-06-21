@@ -113,6 +113,7 @@ section { padding: 64px 0; }
 .plan .price { font-size: 30px; font-weight: 900; margin: 12px 0 2px; }
 .plan .price small { font-size: 14px; color: var(--muted); font-weight: 600; }
 .plan .desc { color: var(--muted); font-size: 14px; min-height: 40px; margin-bottom: 12px; }
+.plan .devices { display: inline-block; margin: 0 0 14px; padding: 5px 12px; font-size: 13px; font-weight: 800; color: var(--accent-2); border: 1px solid var(--accent); border-radius: 999px; }
 .plan ul { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 9px; }
 .plan li { font-size: 14px; color: var(--text); padding-left: 24px; position: relative; }
 .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 900; }
