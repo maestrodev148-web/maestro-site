@@ -73,20 +73,24 @@
           Δεν χρειάζεσαι καλώδιο ούτε υπολογιστή. Πάτα το κουμπί και ακολούθησε τα 3 βήματα.
         </p>
 
-        <!-- Προειδοποίηση για in-app browser (Facebook, Instagram, σαρωτές QR κ.λπ.) -->
+        <!-- Προειδοποίηση: δεν είσαι σε πραγματικό Chrome (σαρωτής QR, Facebook, WebView κ.λπ.) -->
         <div class="warn" id="inAppWarn">
-          <h3>⚠️ Άνοιξε αυτή τη σελίδα στον Chrome</h3>
-          <p style="margin:0 0 12px;">
-            Αυτή τη στιγμή βλέπεις τη σελίδα μέσα σε άλλη εφαρμογή (π.χ. σαρωτή QR ή Facebook).
-            Εκεί η λήψη <strong>χαλάει</strong> και το αρχείο βγαίνει «λευκό / άγνωστο».
+          <h3>⚠️ Σταμάτα — άνοιξε αυτή τη σελίδα στον Chrome</h3>
+          <p style="margin:0 0 14px;">
+            Βλέπεις τη σελίδα μέσα σε <strong id="whichApp">άλλη εφαρμογή</strong> (π.χ. σαρωτή QR ή Facebook).
+            Εκεί η λήψη <strong>χαλάει</strong>: το αρχείο κατεβαίνει «λευκό / άγνωστο» και δεν εγκαθίσταται.
           </p>
-          <a class="btn btn-primary" id="openChrome" href="#" style="display:inline-block;">Άνοιγμα στον Chrome</a>
+          <a class="btn btn-primary" id="openChrome" href="#"
+             style="display:block; text-align:center; font-size:19px; font-weight:800; padding:18px;">
+            🟢 Άνοιγμα στον Chrome
+          </a>
           <div class="copybox">
             <input id="linkInput" type="text" readonly />
             <button id="copyBtn" type="button">Αντιγραφή</button>
           </div>
           <p class="note" style="margin:12px 0 0;">
-            Αν δεν ανοίξει μόνο του: αντίγραψε τον σύνδεσμο, άνοιξε τον <strong>Chrome</strong> και επικόλλησέ τον.
+            Αν δεν ανοίξει μόνο του: πάτα <strong>Αντιγραφή</strong>, μετά άνοιξε την εφαρμογή
+            <strong>Chrome</strong> και επικόλλησε τον σύνδεσμο στη μπάρα διεύθυνσης.
           </p>
         </div>
 
@@ -94,13 +98,27 @@
         <a class="btn btn-primary dl-btn"
            id="apkBtn"
            href="https://github.com/maestrodev148-web/maestro-releases/releases/latest/download/Maestro-1.0.1-Android.apk"
-           download="Maestro.apk"
            type="application/vnd.android.package-archive">
           ⬇️ Κατέβασε τον Maestro (Android)
         </a>
         <p class="fineprint" style="text-align:center; margin-top: 0;">
           Έκδοση 1.0.1 · περίπου 3 MB · δωρεάν
         </p>
+        <p class="fineprint" style="text-align:center; margin-top: 0;">
+          ✅ Σωστή λήψη = ο Chrome σου δείχνει το όνομα
+          <strong>Maestro-1.0.1-Android.apk</strong> πριν κατεβεί.
+        </p>
+
+        <!-- Διαγνωστικό: τι φυλλομετρητή βλέπουμε -->
+        <p class="fineprint" style="text-align:center;">
+          <a href="#" id="diagToggle" style="text-decoration:underline;">Τεχνικές πληροφορίες</a>
+        </p>
+        <div id="diagBox" style="display:none;">
+          <div class="copybox">
+            <input id="diagInput" type="text" readonly />
+            <button id="diagCopy" type="button">Αντιγραφή</button>
+          </div>
+        </div>
 
         <!-- Για επισκέπτες από υπολογιστή -->
         <div id="desktopOnly">
@@ -203,20 +221,73 @@
       }
       wireCopy('copyBtn', 'linkInput');
       wireCopy('copyPage', 'pageLink');
+      wireCopy('diagCopy', 'diagInput');
 
-      // Εντοπισμός in-app browser (σαρωτές QR, Facebook, Instagram, Messenger, WebView)
-      var inApp = /FBAN|FBAV|FB_IAB|Instagram|Line\/|Twitter|Snapchat|Pinterest|MicroMessenger|; wv\)/i.test(ua)
-        || (isAndroid && /Version\/\d+\.\d+/.test(ua) && !/Chrome\/[.0-9]* Mobile/i.test(ua));
+      // --- Ποιος φυλλομετρητής είναι; Δεχόμαστε ΜΟΝΟ όσους κατεβάζουν σωστά APK. ---
+      function detectBrowser() {
+        if (/FBAN|FBAV|FB_IAB/i.test(ua)) return { name: 'Facebook', ok: false };
+        if (/Instagram/i.test(ua)) return { name: 'Instagram', ok: false };
+        if (/Messenger/i.test(ua)) return { name: 'Messenger', ok: false };
+        if (/MicroMessenger/i.test(ua)) return { name: 'WeChat', ok: false };
+        if (/Line\//i.test(ua)) return { name: 'LINE', ok: false };
+        if (/Viber/i.test(ua)) return { name: 'Viber', ok: false };
+        if (/Snapchat/i.test(ua)) return { name: 'Snapchat', ok: false };
+        if (/TikTok|BytedanceWebview|musical_ly/i.test(ua)) return { name: 'TikTok', ok: false };
+        if (/Twitter/i.test(ua)) return { name: 'X / Twitter', ok: false };
+        if (/Pinterest/i.test(ua)) return { name: 'Pinterest', ok: false };
+        // Γενικό WebView μέσα σε εφαρμογή (σαρωτές QR κ.λπ.)
+        if (/;\s*wv\)/i.test(ua) || /\bwv\b/.test(ua)) return { name: 'εφαρμογή (WebView)', ok: false };
+        // Φυλλομετρητές που κατεβάζουν APK σωστά
+        if (/SamsungBrowser/i.test(ua)) return { name: 'Samsung Internet', ok: true };
+        if (/EdgA\//i.test(ua)) return { name: 'Microsoft Edge', ok: true };
+        if (/Firefox\/|FxiOS/i.test(ua)) return { name: 'Firefox', ok: true };
+        if (/OPR\/|Opera/i.test(ua)) return { name: 'Opera', ok: true };
+        if (/Chrome\/\S+\s+Mobile/i.test(ua) || /Chrome\/\S+/i.test(ua)) return { name: 'Chrome', ok: true };
+        return { name: 'άγνωστη εφαρμογή', ok: false };
+      }
 
-      if (isAndroid && inApp) {
+      var br = detectBrowser();
+
+      // Διαγνωστικό κείμενο (για να μπορεί ο χρήστης να μας το στείλει)
+      var diagText = br.name + (br.ok ? ' (OK)' : ' (ΔΕΝ κατεβάζει σωστά)') + ' — ' + ua;
+      var diagInput = document.getElementById('diagInput');
+      if (diagInput) diagInput.value = diagText;
+      var diagToggle = document.getElementById('diagToggle');
+      if (diagToggle) {
+        diagToggle.addEventListener('click', function (e) {
+          e.preventDefault();
+          var box = document.getElementById('diagBox');
+          box.style.display = box.style.display === 'none' ? 'block' : 'none';
+        });
+      }
+
+      // Αν ΔΕΝ είναι σίγουρα σωστός φυλλομετρητής → δείξε την προειδοποίηση
+      if (isAndroid && !br.ok) {
         var warn = document.getElementById('inAppWarn');
         if (warn) warn.classList.add('show');
+        var which = document.getElementById('whichApp');
+        if (which) which.textContent = br.name;
+
+        // Το κουμπί λήψης γίνεται δευτερεύον, για να μην το πατήσει κατά λάθος
+        var apkBtn = document.getElementById('apkBtn');
+        if (apkBtn) {
+          apkBtn.classList.remove('btn-primary');
+          apkBtn.classList.add('btn-ghost');
+          apkBtn.style.opacity = '.65';
+        }
+
         var oc = document.getElementById('openChrome');
         if (oc) {
           // Άνοιγμα της ίδιας σελίδας στον Chrome μέσω Android intent
           oc.href = 'intent://' + location.host + location.pathname
             + '#Intent;scheme=https;package=com.android.chrome;'
             + 'S.browser_fallback_url=' + encodeURIComponent(pageUrl) + ';end';
+          oc.addEventListener('click', function () {
+            // Εφεδρικός δρόμος αν το intent δεν πιάσει
+            setTimeout(function () {
+              location.href = 'googlechrome://navigate?url=' + encodeURIComponent(pageUrl);
+            }, 900);
+          });
         }
       }
 

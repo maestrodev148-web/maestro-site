@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Maestro">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <!-- Full-bleed background so the icon is maskable-safe (platform applies the mask). -->
+  <rect width="512" height="512" fill="url(#g)"/>
+  <!-- Bold "M" kept well within the inner 80% safe zone. -->
+  <path d="M138 360 V152 h44 l74 104 74-104 h44 v208 h-46 V232 l-72 100 -72-100 v128 z"
+        fill="#ffffff"/>
+</svg>
