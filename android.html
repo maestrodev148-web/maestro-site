@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maestro για Android — Κατέβασμα &amp; Εγκατάσταση</title>
+  <meta name="description" content="Κατέβασε και εγκατέστησε τον Maestro στο κινητό σου σε 3 βήματα. Χωρίς καλώδια, χωρίς υπολογιστή." />
+  <meta property="og:title" content="Maestro για Android" />
+  <meta property="og:description" content="Κατέβασε την εφαρμογή στο κινητό σου σε 3 βήματα." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .dl-wrap { max-width: 720px; margin: 0 auto; }
+    .dl-btn {
+      display: block; width: 100%; box-sizing: border-box;
+      text-align: center; font-size: 20px; font-weight: 800;
+      padding: 22px 18px; border-radius: 16px; margin: 18px 0 8px;
+      text-decoration: none;
+    }
+    .warn {
+      display: none; border-radius: 14px; padding: 18px 20px; margin: 18px 0;
+      background: rgba(255, 176, 32, .12); border: 1px solid rgba(255, 176, 32, .45);
+    }
+    .warn.show { display: block; }
+    .warn h3 { margin: 0 0 8px; font-size: 18px; }
+    .steps { counter-reset: st; list-style: none; padding: 0; margin: 28px 0 0; }
+    .steps li {
+      counter-increment: st; position: relative; padding: 0 0 22px 56px; margin: 0;
+      line-height: 1.6; font-size: 17px;
+    }
+    .steps li::before {
+      content: counter(st); position: absolute; left: 0; top: -2px;
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px;
+      background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff;
+    }
+    .copybox {
+      display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .copybox input {
+      flex: 1 1 240px; min-width: 0; padding: 12px 14px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06);
+      color: inherit; font-size: 14px;
+    }
+    .copybox button {
+      padding: 12px 18px; border-radius: 10px; border: 0; cursor: pointer;
+      font-weight: 700; font-size: 15px; background: #6366f1; color: #fff;
+    }
+    .qr-box { text-align: center; margin: 24px 0; }
+    .qr-box img { width: 240px; height: 240px; border-radius: 14px; background: #fff; padding: 10px; }
+    #desktopOnly { display: none; }
+    .note { font-size: 15px; opacity: .8; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html"><span class="dot"></span> Maestro</a>
+      <nav class="nav">
+        <a href="index.html#features">Δυνατότητες</a>
+        <a href="index.html#pricing">Τιμές</a>
+        <a href="index.html#download">Κατέβασμα</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="padding-bottom: 10px;">
+      <div class="container dl-wrap">
+        <span class="badge">📱 Maestro για Android</span>
+        <h1 style="font-size: 34px;">Κατέβασε την εφαρμογή στο κινητό σου</h1>
+        <p class="lead" style="font-size: 18px;">
+          Δεν χρειάζεσαι καλώδιο ούτε υπολογιστή. Πάτα το κουμπί και ακολούθησε τα 3 βήματα.
+        </p>
+
+        <!-- Προειδοποίηση για in-app browser (Facebook, Instagram, σαρωτές QR κ.λπ.) -->
+        <div class="warn" id="inAppWarn">
+          <h3>⚠️ Άνοιξε αυτή τη σελίδα στον Chrome</h3>
+          <p style="margin:0 0 12px;">
+            Αυτή τη στιγμή βλέπεις τη σελίδα μέσα σε άλλη εφαρμογή (π.χ. σαρωτή QR ή Facebook).
+            Εκεί η λήψη <strong>χαλάει</strong> και το αρχείο βγαίνει «λευκό / άγνωστο».
+          </p>
+          <a class="btn btn-primary" id="openChrome" href="#" style="display:inline-block;">Άνοιγμα στον Chrome</a>
+          <div class="copybox">
+            <input id="linkInput" type="text" readonly />
+            <button id="copyBtn" type="button">Αντιγραφή</button>
+          </div>
+          <p class="note" style="margin:12px 0 0;">
+            Αν δεν ανοίξει μόνο του: αντίγραψε τον σύνδεσμο, άνοιξε τον <strong>Chrome</strong> και επικόλλησέ τον.
+          </p>
+        </div>
+
+        <!-- ΚΥΡΙΟ ΚΟΥΜΠΙ ΛΗΨΗΣ -->
+        <a class="btn btn-primary dl-btn"
+           id="apkBtn"
+           href="https://github.com/maestrodev148-web/maestro-releases/releases/latest/download/Maestro-1.0.1-Android.apk"
+           download="Maestro.apk"
+           type="application/vnd.android.package-archive">
+          ⬇️ Κατέβασε τον Maestro (Android)
+        </a>
+        <p class="fineprint" style="text-align:center; margin-top: 0;">
+          Έκδοση 1.0.1 · περίπου 3 MB · δωρεάν
+        </p>
+
+        <!-- Για επισκέπτες από υπολογιστή -->
+        <div id="desktopOnly">
+          <div class="qr-box">
+            <p class="note" style="margin-bottom: 10px;">
+              Είσαι σε υπολογιστή. <strong>Σκάναρε τον κωδικό με το κινητό σου</strong> — και μετά
+              άνοιξε τον σύνδεσμο στον <strong>Chrome</strong>, όχι μέσα στον σαρωτή.
+            </p>
+            <img id="qrImg" alt="QR code για κατέβασμα στο κινητό" />
+          </div>
+          <div class="copybox">
+            <input id="pageLink" type="text" readonly />
+            <button id="copyPage" type="button">Αντιγραφή συνδέσμου</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top: 0;">
+      <div class="container dl-wrap">
+        <h2 class="section-title" style="text-align:left; font-size: 26px;">Εγκατάσταση σε 3 βήματα</h2>
+        <ol class="steps">
+          <li>
+            <strong>Πάτα το κουμπί λήψης.</strong><br />
+            Ο Chrome μπορεί να ρωτήσει «Να διατηρηθεί το αρχείο;» — πάτα <strong>«Λήψη / Διατήρηση»</strong>.
+            Το Android προειδοποιεί για αρχεία εκτός Play Store· αυτό είναι φυσιολογικό.
+          </li>
+          <li>
+            <strong>Άνοιξε το αρχείο που κατέβηκε.</strong><br />
+            Πάτα την ειδοποίηση «Η λήψη ολοκληρώθηκε», ή πήγαινε
+            <strong>Αρχεία → Λήψεις</strong> και πάτα το <code>Maestro.apk</code>.
+          </li>
+          <li>
+            <strong>Δώσε άδεια και εγκατάστησε.</strong><br />
+            Θα εμφανιστεί «Δεν επιτρέπεται η εγκατάσταση άγνωστων εφαρμογών».
+            Πάτα <strong>«Ρυθμίσεις»</strong> → άναψε το <strong>«Να επιτρέπεται από αυτήν την πηγή»</strong>
+            → γύρνα πίσω → <strong>«Εγκατάσταση»</strong>. Γίνεται μία φορά μόνο.
+          </li>
+        </ol>
+
+        <div class="access" style="margin-top: 10px;">
+          <h2 style="font-size: 22px;">Το αρχείο βγήκε «λευκό» ή «άγνωστο»;</h2>
+          <p class="note">
+            Σημαίνει ότι το κατέβασε κάποια άλλη εφαρμογή (σαρωτής QR, Facebook, Messenger)
+            και του έφυγε η κατάληξη. Δύο λύσεις:
+          </p>
+          <ul class="note">
+            <li><strong>Ξανακατέβασέ το από τον Chrome</strong> — άνοιξε αυτή τη σελίδα στον Chrome και πάτα το κουμπί.</li>
+            <li><strong>Ή μετονόμασέ το:</strong> Αρχεία → Λήψεις → κράτα πατημένο το αρχείο →
+              Μετονομασία → δώσε του όνομα που τελειώνει σε <strong>.apk</strong> (π.χ. <code>Maestro.apk</code>) → πάτα το.</li>
+          </ul>
+        </div>
+
+        <p class="fineprint" style="margin-top: 24px;">
+          Μετά την εγκατάσταση: άνοιξε τον Maestro στο κινητό και μπες με το <strong>ίδιο email και κωδικό</strong>
+          που έχεις στον υπολογιστή. Έτσι συνδέονται μεταξύ τους.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>© <span id="year">2026</span> Maestro · Φτιαγμένο με φροντίδα για όλους.</div>
+      <nav class="links">
+        <a href="privacy.html">Απόρρητο</a>
+        <a href="terms.html">Όροι χρήσης</a>
+        <a href="refund.html">Επιστροφές</a>
+        <a href="mailto:maestrodev148@gmail.com">Επικοινωνία</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+
+      var ua = navigator.userAgent || '';
+      var isAndroid = /Android/i.test(ua);
+      var pageUrl = location.origin + location.pathname;
+
+      // Σύνδεσμοι για αντιγραφή
+      var linkInput = document.getElementById('linkInput');
+      var pageLink = document.getElementById('pageLink');
+      if (linkInput) linkInput.value = pageUrl;
+      if (pageLink) pageLink.value = pageUrl;
+
+      function wireCopy(btnId, inputId) {
+        var btn = document.getElementById(btnId);
+        var inp = document.getElementById(inputId);
+        if (!btn || !inp) return;
+        btn.addEventListener('click', function () {
+          var done = function () { btn.textContent = '✅ Αντιγράφηκε'; setTimeout(function () { btn.textContent = 'Αντιγραφή'; }, 2000); };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(inp.value).then(done, function () { inp.select(); document.execCommand('copy'); done(); });
+          } else {
+            inp.select(); document.execCommand('copy'); done();
+          }
+        });
+      }
+      wireCopy('copyBtn', 'linkInput');
+      wireCopy('copyPage', 'pageLink');
+
+      // Εντοπισμός in-app browser (σαρωτές QR, Facebook, Instagram, Messenger, WebView)
+      var inApp = /FBAN|FBAV|FB_IAB|Instagram|Line\/|Twitter|Snapchat|Pinterest|MicroMessenger|; wv\)/i.test(ua)
+        || (isAndroid && /Version\/\d+\.\d+/.test(ua) && !/Chrome\/[.0-9]* Mobile/i.test(ua));
+
+      if (isAndroid && inApp) {
+        var warn = document.getElementById('inAppWarn');
+        if (warn) warn.classList.add('show');
+        var oc = document.getElementById('openChrome');
+        if (oc) {
+          // Άνοιγμα της ίδιας σελίδας στον Chrome μέσω Android intent
+          oc.href = 'intent://' + location.host + location.pathname
+            + '#Intent;scheme=https;package=com.android.chrome;'
+            + 'S.browser_fallback_url=' + encodeURIComponent(pageUrl) + ';end';
+        }
+      }
+
+      // Σε υπολογιστή: δείξε QR + σύνδεσμο
+      if (!isAndroid) {
+        var d = document.getElementById('desktopOnly');
+        if (d) d.style.display = 'block';
+        var qr = document.getElementById('qrImg');
+        if (qr) {
+          qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=480x480&margin=10&data='
+            + encodeURIComponent(pageUrl);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
