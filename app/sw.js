@@ -10,12 +10,20 @@
 //  - Hashed build assets (/assets/*) are immutable per build → cache-first is safe & fast.
 //  - Bump CACHE version to purge the old (cache-first) shell on activate.
 
-const CACHE = 'maestro-mobile-v5';
+const CACHE = 'maestro-mobile-v6';
 
 // ΒΑΣΗ ΔΙΑΔΡΟΜΗΣ — υπολογίζεται από τη θέση του ίδιου του sw.js.
 // Έτσι δουλεύει και στη ρίζα (Android/dev) και σε υπο-φάκελο (iPhone PWA).
 const BASE = new URL('./', self.location).pathname; // π.χ. '/' ή '/maestro-site/app/'
-const SHELL = [BASE, `${BASE}index.html`, `${BASE}icon.svg`, `${BASE}manifest.webmanifest`];
+const SHELL = [
+  BASE,
+  `${BASE}index.html`,
+  `${BASE}icon.svg`,
+  `${BASE}icon-192.png`,
+  `${BASE}icon-512.png`,
+  `${BASE}apple-touch-icon.png`,
+  `${BASE}manifest.webmanifest`,
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
