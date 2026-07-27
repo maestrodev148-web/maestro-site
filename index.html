@@ -9,6 +9,30 @@
   <meta property="og:description" content="Χειρίσου όλον τον υπολογιστή με τη φωνή σου. Agents, skills marketplace, κοινότητα, σύνδεση με κινητό." />
   <meta property="og:type" content="website" />
   <link rel="stylesheet" href="styles.css" />
+<style>
+  .dlhelp{position:fixed;inset:0;z-index:9999;background:rgba(8,10,20,.72);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;}
+  .dlhelp[hidden]{display:none;}
+  .dlhelp-box{position:relative;background:#fff;color:#12141c;border-radius:20px;max-width:560px;width:100%;padding:34px 30px 30px;box-shadow:0 30px 80px rgba(0,0,0,.45);text-align:left;max-height:92vh;overflow:auto;}
+  .dlhelp-x{position:absolute;top:10px;right:14px;background:none;border:0;font-size:2.2rem;line-height:1;color:#8b90a0;cursor:pointer;padding:6px 10px;}
+  .dlhelp-x:hover{color:#12141c;}
+  .dlhelp-step{display:inline-block;background:#e6f7ec;color:#1a7f42;font-weight:700;font-size:1rem;padding:6px 14px;border-radius:999px;margin-bottom:12px;}
+  .dlhelp-box h3{font-size:1.6rem;line-height:1.25;margin:0 0 14px;color:#12141c;}
+  .dlhelp-arrow{font-size:1.15rem;color:#c2410c;background:#fff4ed;border:2px dashed #fdba74;border-radius:12px;padding:10px 14px;margin-bottom:16px;text-align:center;}
+  .dlhelp-mock{border:2px solid #e3e5ec;border-radius:14px;overflow:hidden;margin-bottom:18px;}
+  .dlhelp-mock-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#f7f8fb;}
+  .dlhelp-mock-ico{font-size:1.6rem;}
+  .dlhelp-mock-name{flex:1;font-size:.95rem;font-weight:600;word-break:break-all;}
+  .dlhelp-mock-name small{font-weight:500;color:#b91c1c;}
+  .dlhelp-mock-dots{font-size:1.7rem;font-weight:700;color:#12141c;background:#ffe9a8;border-radius:8px;padding:0 10px;animation:dlpulse 1.3s ease-in-out infinite;}
+  @keyframes dlpulse{0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
+  @media (prefers-reduced-motion: reduce){.dlhelp-mock-dots{animation:none;}}
+  .dlhelp-mock-menu{display:flex;flex-direction:column;border-top:2px solid #e3e5ec;}
+  .dlhelp-mock-keep{padding:12px 16px;font-weight:800;background:#e6f7ec;color:#1a7f42;}
+  .dlhelp-mock-other{padding:12px 16px;color:#9aa0ae;}
+  .dlhelp-list{margin:0 0 18px;padding-left:22px;font-size:1.1rem;line-height:1.85;color:#12141c;}
+  .dlhelp-why{font-size:.98rem;line-height:1.6;color:#4b5162;background:#f5f6fa;border-radius:12px;padding:14px 16px;margin:0 0 20px;}
+  .dlhelp-ok{width:100%;font-size:1.15rem;padding:16px 20px;}
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -182,18 +206,15 @@
           <p>Ένα κλικ. Κατεβαίνει, το ανοίγεις, ξεκινάς να μιλάς.</p>
           <div class="cta" style="justify-content:center; margin-top: 26px;">
             <a class="btn btn-primary"
+               id="dlWin"
+               data-uid="site.download.windows"
+               data-voice-command="κατέβασε τον Μαέστρο για Windows"
                style="font-size:1.15rem; padding:18px 40px;"
                href="https://github.com/maestrodev148-web/maestro-releases/releases/latest/download/Maestro-1.0.2-Windows-Setup.exe">
               ⬇️ Κατέβασε για Windows
             </a>
           </div>
           <p class="fineprint" style="margin-top:14px;">Δωρεάν · Windows 10/11 · 43 MB · ψηφιακά υπογεγραμμένο</p>
-          <p class="fineprint" style="margin-top:18px; max-width:640px; margin-left:auto; margin-right:auto;">
-            <strong>Τι θα δεις:</strong> ο browser ίσως πει «δεν γίνεται συχνά λήψη». Αυτό σημαίνει απλώς ότι η
-            εφαρμογή είναι <em>καινούργια</em> — όχι ότι είναι επικίνδυνη. Πάτα <strong>Διατήρηση</strong> και μετά
-            <strong>Άνοιγμα</strong>. Το αρχείο είναι ψηφιακά υπογεγραμμένο στο όνομα
-            <strong>Andreas Kariavoulas</strong> και κατεβαίνει απευθείας από το GitHub.
-          </p>
           <p class="fineprint" style="margin-top:26px;">
             Έχεις κινητό; <a href="android.html">Δες την εφαρμογή για Android</a> — συνδέεται με τον υπολογιστή σου από οπουδήποτε.
           </p>
@@ -203,6 +224,49 @@
         </div>
       </div>
     </section>
+
+    <!-- ΟΔΗΓΟΣ ΠΟΥ ΕΜΦΑΝΙΖΕΤΑΙ ΜΟΛΙΣ ΠΑΤΗΘΕΙ ΤΟ ΚΑΤΕΒΑΣΜΑ -->
+    <div id="dlHelp" class="dlhelp" hidden>
+      <div class="dlhelp-box" role="dialog" aria-modal="true" aria-labelledby="dlHelpTitle">
+        <button class="dlhelp-x" id="dlHelpClose"
+                data-uid="site.download.help.close"
+                data-voice-command="κλείσε τον οδηγό λήψης"
+                aria-label="Κλείσιμο">×</button>
+
+        <div class="dlhelp-step">Κατεβαίνει τώρα ✅</div>
+        <h3 id="dlHelpTitle">Ο browser θα σε ρωτήσει. Κάνε αυτό:</h3>
+
+        <div class="dlhelp-arrow">Κοίτα <strong>πάνω δεξιά</strong> ↗</div>
+
+        <div class="dlhelp-mock">
+          <div class="dlhelp-mock-row">
+            <span class="dlhelp-mock-ico">📄</span>
+            <span class="dlhelp-mock-name">Maestro-1.0.2-Windows-Setup.exe<br><small>Δεν έχει επιβεβαιωθεί</small></span>
+            <span class="dlhelp-mock-dots">⋮</span>
+          </div>
+          <div class="dlhelp-mock-menu">
+            <span class="dlhelp-mock-keep">Διατήρηση</span>
+            <span class="dlhelp-mock-other">Διαγραφή</span>
+          </div>
+        </div>
+
+        <ol class="dlhelp-list">
+          <li>Πάτα τις <strong>τρεις τελείες ⋮</strong> δίπλα στο αρχείο</li>
+          <li>Διάλεξε <strong>«Διατήρηση»</strong></li>
+          <li>Μετά πάτα <strong>«Άνοιγμα»</strong> — ξεκινά η εγκατάσταση</li>
+        </ol>
+
+        <p class="dlhelp-why">
+          <strong>Γιατί ρωτάει;</strong> Επειδή ο Maestro είναι καινούργιο πρόγραμμα και δεν τον έχουν
+          κατεβάσει ακόμη πολλοί. <em>Δεν</em> σημαίνει ότι είναι επικίνδυνος. Το αρχείο είναι ψηφιακά
+          υπογεγραμμένο στο όνομα <strong>Andreas Kariavoulas</strong> και κατεβαίνει απευθείας από το GitHub.
+        </p>
+
+        <button class="btn btn-primary dlhelp-ok" id="dlHelpOk"
+                data-uid="site.download.help.ok"
+                data-voice-command="το κατάλαβα">Το κατάλαβα</button>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -219,6 +283,32 @@
 
   <script>
     document.getElementById('year').textContent = String(new Date().getFullYear());
+
+    (function () {
+      var link = document.getElementById('dlWin');
+      var help = document.getElementById('dlHelp');
+      if (!link || !help) return;
+
+      var lastFocus = null;
+      function openHelp() {
+        lastFocus = document.activeElement;
+        help.hidden = false;
+        document.body.style.overflow = 'hidden';
+        var ok = document.getElementById('dlHelpOk');
+        if (ok) ok.focus();
+      }
+      function closeHelp() {
+        help.hidden = true;
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      link.addEventListener('click', function () { setTimeout(openHelp, 700); });
+      document.getElementById('dlHelpClose').addEventListener('click', closeHelp);
+      document.getElementById('dlHelpOk').addEventListener('click', closeHelp);
+      help.addEventListener('click', function (e) { if (e.target === help) closeHelp(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !help.hidden) closeHelp(); });
+    })();
   </script>
 </body>
 </html>
