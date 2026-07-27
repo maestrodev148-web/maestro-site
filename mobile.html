@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maestro στο κινητό — iPhone & Android</title>
+<meta name="description" content="Βάλε τον Maestro στο κινητό σου. iPhone και Android. Ένα κλικ." />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .mb-wrap{max-width:620px;margin:0 auto;}
+  .mb-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px 24px;margin-bottom:22px;}
+  .mb-card.is-you{border-color:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.18);}
+  .mb-badge{display:inline-block;background:#16a34a;color:#fff;font-weight:800;font-size:.85rem;padding:5px 14px;border-radius:999px;margin-bottom:12px;letter-spacing:.02em;}
+  .mb-card h2{font-size:1.5rem;margin:0 0 8px;}
+  .mb-card p{margin:0 0 16px;line-height:1.6;}
+  .mb-btn{display:block;text-align:center;font-size:1.15rem;padding:18px 24px;}
+  .mb-steps{margin:18px 0 0;padding-left:22px;font-size:1.05rem;line-height:1.9;}
+  .mb-steps code{background:rgba(255,255,255,.1);padding:2px 8px;border-radius:6px;}
+  .mb-share{display:inline-block;background:rgba(255,255,255,.12);border-radius:8px;padding:2px 10px;font-weight:700;}
+  .mb-qr{text-align:center;}
+  .mb-qr img{background:#fff;padding:14px;border-radius:16px;width:220px;height:220px;}
+  .mb-hide{display:none;}
+  .mb-note{font-size:.95rem;line-height:1.6;color:var(--muted,#9aa0ae);background:rgba(255,255,255,.04);border-radius:12px;padding:14px 16px;}
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html"><span class="dot"></span> Maestro</a>
+      <nav class="nav">
+        <a href="index.html#features">Δυνατότητες</a>
+        <a href="index.html#pricing">Τιμές</a>
+        <a href="index.html#download">Κατέβασμα</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="mb-wrap">
+          <h1 style="text-align:center;">Ο Maestro στο κινητό σου</h1>
+          <p style="text-align:center; font-size:1.1rem; margin-bottom:30px;">
+            Μιλάς στον υπολογιστή σου <strong>από οπουδήποτε</strong> — δουλειά, δρόμος, άλλη πόλη.
+          </p>
+
+          <!-- iPhone / iPad -->
+          <div class="mb-card" id="cardIos">
+            <div class="mb-badge mb-hide" id="badgeIos">Αυτό είναι για σένα</div>
+            <h2>🍎 iPhone &amp; iPad</h2>
+            <p>
+              Δεν χρειάζεται App Store. Ο Maestro ανοίγει κατευθείαν και μπαίνει στην αρχική σου
+              οθόνη σαν κανονική εφαρμογή, με δικό του εικονίδιο.
+            </p>
+            <a class="btn btn-primary mb-btn"
+               href="app/"
+               data-uid="mobile.open.ios"
+               data-voice-command="άνοιξε την εφαρμογή στο iphone">
+              📱 Άνοιξε τον Maestro
+            </a>
+            <ol class="mb-steps">
+              <li>Πάτα το κουμπί πιο πάνω (πρέπει να είσαι στον <strong>Safari</strong>).</li>
+              <li>Πάτα το εικονίδιο <span class="mb-share">Κοινή χρήση ⬆️</span> κάτω στη μέση.</li>
+              <li>Διάλεξε <strong>«Προσθήκη στην αρχική οθόνη»</strong> → <strong>Προσθήκη</strong>.</li>
+            </ol>
+            <p style="margin-top:16px;" class="mb-note">
+              Έτοιμο. Θα δεις το εικονίδιο του Maestro στην αρχική σου οθόνη. Ανοίγει σαν κανονική
+              εφαρμογή, χωρίς μπάρα διεύθυνσης.
+            </p>
+          </div>
+
+          <!-- Android -->
+          <div class="mb-card" id="cardAndroid">
+            <div class="mb-badge mb-hide" id="badgeAndroid">Αυτό είναι για σένα</div>
+            <h2>🤖 Android</h2>
+            <p>Κατέβασε την εφαρμογή και εγκατάστησέ την. Δωρεάν, 3 MB.</p>
+            <a class="btn btn-primary mb-btn"
+               href="Maestro.apk"
+               download="Maestro.apk"
+               type="application/vnd.android.package-archive"
+               data-uid="mobile.download.android"
+               data-voice-command="κατέβασε την εφαρμογή android">
+              ⬇️ Κατέβασε τον Maestro
+            </a>
+            <p style="margin-top:14px;">
+              <a href="android.html">Αναλυτικές οδηγίες εγκατάστασης →</a>
+            </p>
+            <p class="mb-note">
+              Δεν θέλεις εγκατάσταση; Μπορείς να τον ανοίξεις και από τον browser:
+              <a href="app/">άνοιγμα χωρίς εγκατάσταση</a>.
+            </p>
+          </div>
+
+          <!-- Υπολογιστής: QR -->
+          <div class="mb-card mb-qr" id="cardDesktop">
+            <div class="mb-badge mb-hide" id="badgeDesktop">Είσαι σε υπολογιστή</div>
+            <h2>Σκάναρε με το κινητό σου</h2>
+            <p>Άνοιξε την <strong>κάμερα</strong> του κινητού και στόχευσε τον κωδικό.</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=440x440&data=https%3A%2F%2Fmaestrovoice.com%2Fmobile.html"
+                 alt="Κωδικός QR για άνοιγμα στο κινητό" width="220" height="220" loading="lazy" />
+            <p style="margin-top:16px;" class="mb-note">
+              Η σελίδα θα καταλάβει μόνη της αν έχεις iPhone ή Android και θα σου δείξει το σωστό.
+            </p>
+          </div>
+
+          <p class="mb-note" style="margin-top:26px;">
+            <strong>Μετά:</strong> άνοιξε τον Maestro στο κινητό και μπες με το <strong>ίδιο email και
+            κωδικό</strong> που έχεις στον υπολογιστή. Ο υπολογιστής πρέπει να είναι ανοιχτός.
+            Δεν χρειάζεται να είστε στο ίδιο WiFi.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>© <span id="year">2026</span> Maestro · Φτιαγμένο με φροντίδα για όλους.</div>
+      <nav class="links">
+        <a href="privacy.html">Απόρρητο</a>
+        <a href="terms.html">Όροι χρήσης</a>
+        <a href="refund.html">Επιστροφές</a>
+        <a href="mailto:maestrodev148@gmail.com">Επικοινωνία</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+
+    // Ποια συσκευή κρατάει ο χρήστης; Δείχνουμε ΠΡΩΤΟ και τονισμένο το σωστό.
+    // Δεν κρύβουμε τα άλλα — απλώς τα κατεβάζουμε πιο κάτω (no-lie: όλες οι
+    // επιλογές παραμένουν διαθέσιμες αν η αναγνώριση πέσει έξω).
+    (function () {
+      var ua = navigator.userAgent || '';
+      // iPadOS 13+ δηλώνει «Macintosh» — το ξεχωρίζουμε από την οθόνη αφής.
+      var isIpadOS = /Macintosh/.test(ua) && typeof document !== 'undefined' && 'ontouchend' in document;
+      var isIos = /iPhone|iPad|iPod/.test(ua) || isIpadOS;
+      var isAndroid = /Android/.test(ua);
+
+      var wrap = document.querySelector('.mb-wrap');
+      var ios = document.getElementById('cardIos');
+      var andr = document.getElementById('cardAndroid');
+      var desk = document.getElementById('cardDesktop');
+
+      function promote(card, badgeId) {
+        card.classList.add('is-you');
+        document.getElementById(badgeId).classList.remove('mb-hide');
+        // Βάλ' το πρώτο, αμέσως μετά τον εισαγωγικό τίτλο.
+        wrap.insertBefore(card, wrap.children[2]);
+      }
+
+      if (isIos) { promote(ios, 'badgeIos'); desk.classList.add('mb-hide'); }
+      else if (isAndroid) { promote(andr, 'badgeAndroid'); desk.classList.add('mb-hide'); }
+      else { promote(desk, 'badgeDesktop'); }
+    })();
+  </script>
+</body>
+</html>
