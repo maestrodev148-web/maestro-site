@@ -95,9 +95,16 @@
         </div>
 
         <!-- ΚΥΡΙΟ ΚΟΥΜΠΙ ΛΗΨΗΣ -->
+        <!-- Σερβίρεται από ΤΟ ΔΙΚΟ ΜΑΣ domain, χωρίς ανακατεύθυνση: η διεύθυνση
+             τελειώνει σε .apk, άρα ΚΑΘΕ browser αποθηκεύει σωστό όνομα αρχείου.
+             Ο σύνδεσμος του GitHub κατέληγε σε διεύθυνση χωρίς κατάληξη → «λευκό»
+             αρχείο χωρίς εικονίδιο. Το `download` δουλεύει μόνο same-origin. -->
         <a class="btn btn-primary dl-btn"
            id="apkBtn"
-           href="https://github.com/maestrodev148-web/maestro-releases/releases/latest/download/Maestro-1.0.2-Android.apk"
+           href="Maestro.apk"
+           download="Maestro.apk"
+           data-uid="android.download.apk"
+           data-voice-command="κατέβασε το apk"
            type="application/vnd.android.package-archive">
           ⬇️ Κατέβασε τον Maestro (Android)
         </a>
@@ -105,8 +112,8 @@
           Έκδοση 1.0.2 · περίπου 3 MB · δωρεάν
         </p>
         <p class="fineprint" style="text-align:center; margin-top: 0;">
-          ✅ Σωστή λήψη = ο Chrome σου δείχνει το όνομα
-          <strong>Maestro-1.0.2-Android.apk</strong> πριν κατεβεί.
+          ✅ Σωστή λήψη = ο browser σου δείχνει το όνομα
+          <strong>Maestro.apk</strong> πριν κατεβεί.
         </p>
 
         <!-- Διαγνωστικό: τι φυλλομετρητή βλέπουμε -->
