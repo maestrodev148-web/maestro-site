@@ -212,10 +212,10 @@
                data-voice-command="κατέβασε τον Μαέστρο για Windows"
                style="font-size:1.15rem; padding:18px 40px;"
                href="https://github.com/maestrodev148-web/maestro-releases/releases/latest/download/Maestro-Windows-Setup.exe">
-              ⬇️ Κατέβασε για Windows
+              ⬇️ <span id="dlWinLabel">Κατέβασε για Windows</span>
             </a>
           </div>
-          <p class="fineprint" style="margin-top:14px;">Δωρεάν · Windows 10/11 · 43 MB · ψηφιακά υπογεγραμμένο</p>
+          <p class="fineprint" id="dlWinNote" style="margin-top:14px;">Δωρεάν · Windows 10/11 · 43 MB · ψηφιακά υπογεγραμμένο</p>
 
           <div style="max-width:520px; margin:34px auto 0; padding-top:28px; border-top:1px solid rgba(255,255,255,.12);">
             <p style="font-size:1.05rem; margin:0 0 6px;"><strong>Θέλεις να τον ορίζεις και από το κινητό;</strong></p>
@@ -297,6 +297,28 @@
 
   <script>
     document.getElementById('year').textContent = String(new Date().getFullYear());
+
+    /* Το κουμπί λέει ΠΟΙΑ έκδοση κατεβάζει — τη ρωτάμε ζωντανά, δεν τη γράφουμε
+       στο χέρι (αλλιώς μένει πίσω σε κάθε νέα έκδοση, όπως έγινε με την 1.0.7).
+       Αν δεν απαντήσει το GitHub, μένει το ουδέτερο κείμενο — καμία ψεύτικη πληροφορία. */
+    (function () {
+      var label = document.getElementById('dlWinLabel');
+      var note = document.getElementById('dlWinNote');
+      if (!label) return;
+      try {
+        fetch('https://api.github.com/repos/maestrodev148-web/maestro-releases/releases/latest', {
+          headers: { Accept: 'application/vnd.github+json' }
+        })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (j) {
+            var tag = j && j.tag_name ? String(j.tag_name).replace(/^v/, '') : '';
+            if (!/^\d+\.\d+\.\d+/.test(tag)) return;
+            label.textContent = 'Κατέβασε την έκδοση ' + tag + ' για Windows';
+            if (note) note.textContent = 'Δωρεάν · Windows 10/11 · έκδοση ' + tag + ' · ψηφιακά υπογεγραμμένο';
+          })
+          .catch(function () { /* χωρίς δίκτυο — κρατάμε το ουδέτερο κείμενο */ });
+      } catch (e) { /* ignore */ }
+    })();
 
     (function () {
       var link = document.getElementById('dlWin');
