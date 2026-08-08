@@ -21,6 +21,19 @@
   .mb-qr img{background:#fff;padding:14px;border-radius:16px;width:220px;height:220px;}
   .mb-hide{display:none;}
   .mb-note{font-size:.95rem;line-height:1.6;color:var(--muted,#9aa0ae);background:rgba(255,255,255,.04);border-radius:12px;padding:14px 16px;}
+
+  /* «Πρώτα ο υπολογιστής» — μπλε, ξεχωριστό από τις πράσινες κάρτες συσκευής. */
+  .mb-first{background:rgba(59,130,246,.10);border:1px solid rgba(59,130,246,.45);border-radius:20px;padding:24px;margin-bottom:26px;}
+  .mb-first h2{font-size:1.35rem;margin:0 0 12px;}
+  .mb-first p{margin:0 0 12px;line-height:1.6;}
+  .mb-first-warn{background:rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;}
+  .mb-first-ok{font-size:.95rem;color:var(--muted,#9aa0ae);margin:14px 0 0 !important;text-align:center;}
+
+  /* APK: δεύτερη επιλογή, μαζεμένη — μπλοκάρεται από το Auto Blocker της Samsung. */
+  .mb-apk{margin-top:20px;border-top:1px solid rgba(255,255,255,.12);padding-top:16px;}
+  .mb-apk summary{cursor:pointer;font-size:.98rem;color:var(--muted,#9aa0ae);padding:6px 0;}
+  .mb-apk summary:hover{color:#fff;}
+  .mb-apk-body{padding-top:14px;}
 </style>
 </head>
 <body>
@@ -40,9 +53,33 @@
       <div class="container">
         <div class="mb-wrap">
           <h1 style="text-align:center;">Ο Maestro στο κινητό σου</h1>
-          <p style="text-align:center; font-size:1.1rem; margin-bottom:30px;">
+          <p style="text-align:center; font-size:1.1rem; margin-bottom:24px;">
             Μιλάς στον υπολογιστή σου <strong>από οπουδήποτε</strong> — δουλειά, δρόμος, άλλη πόλη.
           </p>
+
+          <!-- ΠΡΩΤΑ Ο ΥΠΟΛΟΓΙΣΤΗΣ. Οι δοκιμαστές έφταναν εδώ από link και νόμιζαν
+               ότι ο Maestro είναι εφαρμογή κινητού· 10 στους 10 μπερδεύτηκαν. -->
+          <div class="mb-first">
+            <h2>💻 Ο Maestro ζει στον υπολογιστή</h2>
+            <p>
+              Η <strong>κύρια εφαρμογή είναι για Windows</strong>. Εκεί ανοίγει προγράμματα, γράφει
+              κείμενα, στέλνει email — κάνει τη δουλειά.
+            </p>
+            <p>
+              Αυτό που βάζεις στο κινητό είναι το <strong>τηλεχειριστήριό του</strong>. Του μιλάς από
+              μακριά και εκείνος εκτελεί στον υπολογιστή.
+            </p>
+            <p class="mb-first-warn">
+              Χωρίς τον Maestro στον υπολογιστή, το κινητό <strong>δεν έχει τι να χειριστεί</strong>.
+            </p>
+            <a class="btn btn-primary mb-btn"
+               href="index.html#download"
+               data-uid="mobile.first.desktop"
+               data-voice-command="κατέβασε πρώτα για υπολογιστή, κατέβασε για windows">
+              ⬇️ Κατέβασε πρώτα για Windows
+            </a>
+            <p class="mb-first-ok">Το έχεις ήδη στον υπολογιστή; Προχώρα παρακάτω. 👇</p>
+          </div>
 
           <!-- iPhone / iPad -->
           <div class="mb-card" id="cardIos">
@@ -73,22 +110,53 @@
           <div class="mb-card" id="cardAndroid">
             <div class="mb-badge mb-hide" id="badgeAndroid">Αυτό είναι για σένα</div>
             <h2>🤖 Android</h2>
-            <p>Κατέβασε την εφαρμογή και εγκατάστησέ την. Δωρεάν, 3 MB.</p>
+            <p>
+              Δεν χρειάζεται Play Store. Ο Maestro ανοίγει κατευθείαν και μπαίνει στην αρχική σου
+              οθόνη σαν κανονική εφαρμογή, με δικό του εικονίδιο.
+            </p>
             <a class="btn btn-primary mb-btn"
-               href="Maestro.apk"
-               download="Maestro.apk"
-               type="application/vnd.android.package-archive"
-               data-uid="mobile.download.android"
-               data-voice-command="κατέβασε την εφαρμογή android">
-              ⬇️ Κατέβασε τον Maestro
+               href="app/"
+               data-uid="mobile.open.android"
+               data-voice-command="άνοιξε την εφαρμογή στο android">
+              📱 Άνοιξε τον Maestro
             </a>
-            <p style="margin-top:14px;">
-              <a href="android.html">Αναλυτικές οδηγίες εγκατάστασης →</a>
+            <ol class="mb-steps">
+              <li>Πάτα το κουμπί πιο πάνω (πρέπει να είσαι στον <strong>Chrome</strong>).</li>
+              <li>Πάτα το <span class="mb-share">⋮</span> πάνω δεξιά.</li>
+              <li>Διάλεξε <strong>«Προσθήκη στην αρχική οθόνη»</strong> ή <strong>«Εγκατάσταση εφαρμογής»</strong>.</li>
+            </ol>
+            <p style="margin-top:16px;" class="mb-note">
+              Έτοιμο. Θα δεις το εικονίδιο του Maestro στην αρχική σου οθόνη. Ανοίγει σαν κανονική
+              εφαρμογή, χωρίς μπάρα διεύθυνσης.
             </p>
-            <p class="mb-note">
-              Δεν θέλεις εγκατάσταση; Μπορείς να τον ανοίξεις και από τον browser:
-              <a href="app/">άνοιγμα χωρίς εγκατάσταση</a>.
-            </p>
+
+            <!-- Το APK μπλοκάρεται από το Auto Blocker της Samsung (ενεργό από
+                 προεπιλογή). Μένει ως δεύτερη επιλογή, με τον σωστό δρόμο γύρω του. -->
+            <details class="mb-apk">
+              <summary data-uid="mobile.apk.toggle" data-voice-command="δείξε το αρχείο εγκατάστασης android">
+                Προτιμάς αρχείο εγκατάστασης (APK);
+              </summary>
+              <div class="mb-apk-body">
+                <a class="btn btn-ghost mb-btn"
+                   href="Maestro.apk"
+                   download="Maestro.apk"
+                   type="application/vnd.android.package-archive"
+                   data-uid="mobile.download.android"
+                   data-voice-command="κατέβασε το apk">
+                  ⬇️ Κατέβασε το APK (3 MB)
+                </a>
+                <p class="mb-note" style="margin-top:14px;">
+                  <strong>Σε Samsung</strong> ίσως δεις «Αποκλείστηκε άγνωστη εφαρμογή». Είναι
+                  προστασία του τηλεφώνου, όχι πρόβλημα του Maestro. Για να περάσει:
+                  <br>Ρυθμίσεις → Ασφάλεια και απόρρητο → <strong>Εργαλείο αυτόματου αποκλεισμού</strong> → απενεργοποίηση.
+                  <br><br>Αν σου φαίνεται μπελάς, <strong>χρησιμοποίησε το πράσινο κουμπί πιο πάνω</strong> —
+                  κάνει ακριβώς το ίδιο, χωρίς καμία ρύθμιση.
+                </p>
+                <p style="margin-top:10px;">
+                  <a href="android.html">Αναλυτικές οδηγίες εγκατάστασης →</a>
+                </p>
+              </div>
+            </details>
           </div>
 
           <!-- Υπολογιστής: QR -->
@@ -146,8 +214,10 @@
       function promote(card, badgeId) {
         card.classList.add('is-you');
         document.getElementById(badgeId).classList.remove('mb-hide');
-        // Βάλ' το πρώτο, αμέσως μετά τον εισαγωγικό τίτλο.
-        wrap.insertBefore(card, wrap.children[2]);
+        // Αμέσως μετά το «πρώτα ο υπολογιστής» — αυτό μένει πάντα πρώτο.
+        var first = wrap.querySelector('.mb-first');
+        if (first && first.nextSibling) wrap.insertBefore(card, first.nextSibling);
+        else wrap.appendChild(card);
       }
 
       if (isIos) { promote(ios, 'badgeIos'); desk.classList.add('mb-hide'); }
