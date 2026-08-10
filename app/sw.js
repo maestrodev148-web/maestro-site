@@ -10,7 +10,7 @@
 //  - Hashed build assets (/assets/*) are immutable per build → cache-first is safe & fast.
 //  - Bump CACHE version to purge the old (cache-first) shell on activate.
 
-const CACHE = 'maestro-mobile-v7';
+const CACHE = 'maestro-mobile-v9';
 
 // ΒΑΣΗ ΔΙΑΔΡΟΜΗΣ — υπολογίζεται από τη θέση του ίδιου του sw.js.
 // Έτσι δουλεύει και στη ρίζα (Android/dev) και σε υπο-φάκελο (iPhone PWA).
