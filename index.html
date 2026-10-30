@@ -216,6 +216,8 @@
             </a>
           </div>
           <p class="fineprint" id="dlWinNote" style="margin-top:14px;">Δωρεάν · Windows 10/11 · 43 MB · ψηφιακά υπογεγραμμένο</p>
+          <!-- Δημόσιος μετρητής (30/10/2026): τρία σύνολα από τον server μας. Μένει κρυφός αν δεν απαντήσει — ποτέ ψεύτικο νούμερο. -->
+          <p class="fineprint" id="siteCounter" hidden style="margin-top:6px;" data-uid="site.stats.counter" data-voice-command="πόσοι χρησιμοποιούν τον Μαέστρο"></p>
 
           <div style="max-width:520px; margin:34px auto 0; padding-top:28px; border-top:1px solid rgba(255,255,255,.12);">
             <p style="font-size:1.05rem; margin:0 0 6px;"><strong>Θέλεις να τον ορίζεις και από το κινητό;</strong></p>
@@ -319,6 +321,29 @@
             if (note) note.textContent = 'Δωρεάν · Windows 10/11 · έκδοση ' + tag + ' · ψηφιακά υπογεγραμμένο';
           })
           .catch(function () { /* χωρίς δίκτυο — κρατάμε το ουδέτερο κείμενο */ });
+      } catch (e) { /* ignore */ }
+    })();
+
+    /* Δημόσιος μετρητής: λήψεις (GitHub) + εγκαταστάσεις + ενεργοί 30 ημερών από τον server μας
+       (/v1/stats/public — τρία σύνολα, τίποτα προσωπικό, ίδιες πηγές με την ιδιωτική σελίδα στατιστικών).
+       Αν ο server δεν απαντήσει, η γραμμή μένει κρυφή — δεν δείχνουμε ποτέ νούμερο που δεν ξέρουμε. */
+    (function () {
+      var el = document.getElementById('siteCounter');
+      if (!el) return;
+      try {
+        fetch('https://maestro-cloud-production.up.railway.app/v1/stats/public', { headers: { Accept: 'application/json' } })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (j) {
+            if (!j || typeof j.installs !== 'number' || typeof j.active30 !== 'number') return;
+            var fmt = function (n) { return new Intl.NumberFormat('el-GR').format(n); };
+            var parts = [];
+            if (typeof j.downloads === 'number') parts.push(fmt(j.downloads) + ' λήψεις');
+            parts.push(fmt(j.installs) + (j.installs === 1 ? ' εγκατάσταση' : ' εγκαταστάσεις'));
+            parts.push(fmt(j.active30) + (j.active30 === 1 ? ' ενεργός' : ' ενεργοί') + ' τις τελευταίες 30 ημέρες');
+            el.textContent = parts.join(' · ');
+            el.hidden = false;
+          })
+          .catch(function () { /* χωρίς server — η γραμμή μένει κρυφή */ });
       } catch (e) { /* ignore */ }
     })();
 
